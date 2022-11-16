@@ -6,17 +6,15 @@ using Photon.Realtime;
 
 public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
 {
-
-    public GameObject bomb;
     [SerializeField]
-    Stats stats;
+    PlayerController player;
     Vector2 gridPosition;
 
     public PhotonView PV;
     // Update is called once per frame
     void Start()
     {
-        stats = GameObject.Find("StatsManager").GetComponent<Stats>();
+        player = GetComponent<PlayerController>();
     }
     void Update()
     {
@@ -35,10 +33,10 @@ public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
     
     void BombInstallation()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && stats.BombsNum != 0) {
+        if (Input.GetKeyDown(KeyCode.Space) && player.bombsNum != 0) {
             
-            stats.BombsNum -= 1;
-            PhotonNetwork.Instantiate("bomb", gridPosition, transform.rotation);
+            player.bombsNum -= 1;
+            PhotonNetwork.Instantiate("Bomb", gridPosition, transform.rotation);
 
             StartCoroutine(BombTimer()); 
 
@@ -47,10 +45,9 @@ public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
     IEnumerator BombTimer()
     {
         yield return new WaitForSeconds(2f);
-        stats.BombsNum += 1;
+        player.bombsNum += 1;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-    }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) { }
+    
 }

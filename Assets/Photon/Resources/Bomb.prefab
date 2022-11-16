@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6854739554058026296}
   - component: {fileID: -1802745466879718827}
   - component: {fileID: 4164824197145265247}
+  - component: {fileID: -7515250480567238182}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -92,7 +93,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2475316344911653668, guid: ff62bdcca19b3ce42b973fb5a0b7f427, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -137,8 +138,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531902fd54959754b878819852a42859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  player: {fileID: 0}
+  PV: {fileID: -7515250480567238182}
   explosionPrefab: {fileID: 1065919786214062472, guid: 40e75031fd0935e418aa60739bc8aa65, type: 3}
   explosionLayerMask:
     serializedVersion: 2
     m_Bits: 320
+--- !u!114 &-7515250480567238182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6854739554058026299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4164824197145265247}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

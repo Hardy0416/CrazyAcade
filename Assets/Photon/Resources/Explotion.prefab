@@ -90,7 +90,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6372300561262757410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c4d0062fdb964140a97f6ef50b774cf, type: 3}
   m_Name: 
@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 4403252842556834485}
   - component: {fileID: 3579875200373078134}
   - component: {fileID: 1065919786214062472}
+  - component: {fileID: 3056699606715961781}
   m_Layer: 0
   m_Name: Explotion
   m_TagString: Untagged
@@ -290,6 +291,28 @@ MonoBehaviour:
   start: {fileID: 1372269557047870607}
   middle: {fileID: 2076865353395288617}
   end: {fileID: 8099708566063782240}
+--- !u!114 &3056699606715961781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8550361469470404957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &9003591131603143343
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Explosion : MonoBehaviour
+public class Explosion : MonoBehaviourPunCallbacks
 {
     public AnimationSpriteRenderer start;
     public AnimationSpriteRenderer middle;
@@ -20,5 +22,6 @@ public class Explosion : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
 
+    
 
 }

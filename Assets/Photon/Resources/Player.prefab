@@ -271,7 +271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
-  stats: {fileID: 0}
+  speed: 100
+  bombsNum: 1
+  power: 1.4
   PV: {fileID: 4195031243408207968}
   NickName: {fileID: 463590214516517844}
 --- !u!114 &1857746885042822079
@@ -286,8 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c734b08215eeed4469d22c685579d3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 6854739554058026299, guid: d73b35f0a359b0a4f943f54bdc6a59e7, type: 3}
-  stats: {fileID: 0}
+  player: {fileID: 0}
   PV: {fileID: 4195031243408207968}
 --- !u!114 &4195031243408207968
 MonoBehaviour:

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Brick : MonoBehaviour
+public class Brick : MonoBehaviourPunCallbacks
 {
     public List<GameObject> Items = new List<GameObject>();
     public GameObject explosiveeffect;

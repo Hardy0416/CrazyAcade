@@ -11,6 +11,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject DisconnectPaner;
     public GameObject RespqwnPanel;
 
+
     private void Awake()
     {
         //Phonton서버와 동기화
@@ -45,5 +46,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
         RespqwnPanel.SetActive(false);
+        
     }
 }

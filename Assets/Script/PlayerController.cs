@@ -14,8 +14,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     Vector2 moveVec;
     float vertical;
     float horizontal;
-    [SerializeField]
-    Stats stats;
+
+    [Header("Stats")]
+    public int speed = 100;
+    public int bombsNum = 1; 
+    public float power = 1.4f;
 
     //Photon 
     public PhotonView PV;
@@ -28,7 +31,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     }
     void Start()
     {
-        stats = GameObject.Find("StatsManager").GetComponent<Stats>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         if (vertical == 0 || horizontal == 0) { // 대각선 움직임이 가능하지 않도록
             moveVec = new Vector2(horizontal, vertical); // moveVec only have one value vertical or horizontal
             //Debug.Log(vertical + " " + horizontal);
-            rigid.velocity = moveVec * stats.Speed * Time.deltaTime;
+            rigid.velocity = moveVec * speed * Time.deltaTime;
         }
     }
     void AnimationController()
@@ -68,27 +70,40 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (PV.IsMine) {
+            if (collision.transform.tag == "Skate") {
+                Debug.Log(collision.transform.name);
+                speed += 10;
+            }
+            if (collision.transform.tag == "Ballon") {
+                Debug.Log(collision.transform.name);
+                bombsNum += 1;
+            }
+            if (collision.transform.tag == "Power_Potion") {
+                Debug.Log(collision.transform.name);
+                power += 2f;
+            }
+            if (collision.transform.tag == "Potion") {
+                Debug.Log(collision.transform.name);
+                power += 1f;
+            }
+        }
+    }
+    
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) {
+            stream.SendNext(speed);
+            stream.SendNext(bombsNum);
+            stream.SendNext(power);
+        }
+        else {
+            speed = (int)stream.ReceiveNext();
+            bombsNum = (int)stream.ReceiveNext();
+            power = (float)stream.ReceiveNext();
+        }
         
-        if (collision.transform.tag == "Skate") {
-            Debug.Log(collision.transform.name);
-            stats.Speed += 10;
-        }
-        if (collision.transform.tag == "Ballon") {
-            Debug.Log(collision.transform.name);
-            stats.BombsNum += 1;
-        }
-        if (collision.transform.tag == "Power_Potion") {
-            Debug.Log(collision.transform.name);
-            stats.Power += 2f;
-        }
-        if (collision.transform.tag == "Potion") {
-            Debug.Log(collision.transform.name);
-            stats.Power += 1f;
-        }
+        
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-       
-    }
 }

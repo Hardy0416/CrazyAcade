@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class AnimationSpriteRenderer : MonoBehaviour
+public class AnimationSpriteRenderer : MonoBehaviourPunCallbacks
 {
     SpriteRenderer spriteRenderer;
     public Sprite idleSprite;
