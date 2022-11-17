@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     [Header("Stats")]
     public int speed = 100;
-    public int bombsNum = 1; 
+    public int bombsNum = 1;
     public float power = 1.4f;
 
     //Photon 
@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             Move();
             AnimationController();
         }
-        
+
     }
 
-    void Move() 
+    void Move()
     {
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -59,11 +59,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     void AnimationController()
     {
         //각방향의 인풋을 보고 그방향의 animation 시작
-        anim.SetInteger("vertical", (int)moveVec.y); 
+        anim.SetInteger("vertical", (int)moveVec.y);
         anim.SetInteger("horizontal", (int)moveVec.x);
 
 
-        if(moveVec != Vector2.zero) {
+        if (moveVec != Vector2.zero) {
             anim.SetBool("isMove", true);
         }
         else anim.SetBool("isMove", false);
@@ -89,21 +89,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-    
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-        if (stream.IsWriting) {
-            stream.SendNext(speed);
-            stream.SendNext(bombsNum);
-            stream.SendNext(power);
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (PV.IsMine) {
+            if (stream.IsWriting) {
+                stream.SendNext(speed);
+                stream.SendNext(bombsNum);
+                stream.SendNext(power);
+            }
+            else {
+                speed = (int)stream.ReceiveNext();
+                bombsNum = (int)stream.ReceiveNext();
+                power = (float)stream.ReceiveNext();
+            }
         }
         else {
             speed = (int)stream.ReceiveNext();
             bombsNum = (int)stream.ReceiveNext();
             power = (float)stream.ReceiveNext();
-        }
-        
-        
-    }
 
+        }
+
+    }
 }

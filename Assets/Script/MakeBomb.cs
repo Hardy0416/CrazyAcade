@@ -10,6 +10,9 @@ public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
     PlayerController player;
     Vector2 gridPosition;
 
+    public GameObject bomb;
+    
+    
     public PhotonView PV;
     // Update is called once per frame
     void Start()
@@ -18,6 +21,7 @@ public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
     }
     void Update()
     {
+
         if (PV.IsMine) {
             GetGridPosition();
             BombInstallation();
@@ -36,7 +40,9 @@ public class MakeBomb : MonoBehaviourPunCallbacks, IPunObservable
         if (Input.GetKeyDown(KeyCode.Space) && player.bombsNum != 0) {
             
             player.bombsNum -= 1;
-            PhotonNetwork.Instantiate("Bomb", gridPosition, transform.rotation);
+            PhotonNetwork.Instantiate(bomb.name, gridPosition, transform.rotation); //오 ㅋㅋ 나좀 똑똑한듯
+           
+            
 
             StartCoroutine(BombTimer()); 
 

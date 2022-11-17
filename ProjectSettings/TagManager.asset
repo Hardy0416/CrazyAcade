@@ -22,9 +22,9 @@ TagManager:
   - Ground
   - Enable
   - Item
-  - 
-  - 
-  - 
+  - Player
+  - Destructible
+  - Indestructible
   - 
   - 
   - 

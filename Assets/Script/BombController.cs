@@ -8,23 +8,35 @@ public class BombController : MonoBehaviourPunCallbacks, IPunObservable
 {
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
+ 
     [SerializeField]
     PlayerController player;
-
+    public int index;
     public PhotonView PV;
     Vector2 _position;
 
 
     [Header("Explosion")]
     public Explosion explosionPrefab;
-    public LayerMask explosionLayerMask;
+    public LayerMask explosionLayerMask; // Destructible , Indestructible
     bool explosionTime = false;
 
+    int Count = 0;
+
+    void GetPlayerComponent()
+    {
+        if (index == 0) {
+            player = GameObject.Find("Player0(Clone)").GetComponent<PlayerController>();
+        }
+        else if (index == 1) {
+            player = GameObject.Find("Player1(Clone)").GetComponent<PlayerController>();
+        }
+    }
 
     void Start()
     {
         _position = transform.position;
-        player = GameObject.Find("Player(Clone)").GetComponent<PlayerController>();
+        GetPlayerComponent();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -33,7 +45,6 @@ public class BombController : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void FixedUpdate()
     {
-
         InteractionByRay();
         StartCoroutine(ExplosionTimer());
     }
@@ -53,7 +64,8 @@ public class BombController : MonoBehaviourPunCallbacks, IPunObservable
         for (int i = 0; i < 4; i++) { // up side down
             Debug.DrawRay(myVec, positionArray[i], new Color(0, 1, 1));
             RaycastHit2D rayHit = Physics2D.Raycast(myVec, positionArray[i], player.power, LayerMask.GetMask("Enable"));
-            if (rayHit.collider != null) {
+            if (rayHit.collider != null && Count == 0) {
+                ++Count;
                 BreakBrick(rayHit.transform.gameObject);
             }
         }
@@ -62,7 +74,6 @@ public class BombController : MonoBehaviourPunCallbacks, IPunObservable
     void BreakBrick(GameObject target)
     {
         if (target.transform.tag == "Brick" && explosionTime) {
-
             Destroy(target.transform.gameObject);
         }
     }
@@ -109,6 +120,8 @@ public class BombController : MonoBehaviourPunCallbacks, IPunObservable
 
         Explode(position, direction, length - 1);
     }
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) { }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) { } 
+
 }
 

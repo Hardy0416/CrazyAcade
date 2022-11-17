@@ -8,7 +8,7 @@ public class Brick : MonoBehaviourPunCallbacks
 {
     public List<GameObject> Items = new List<GameObject>();
     public GameObject explosiveeffect;
-    
+     
     private void OnDisable() // ÆÄ±«µÉ¶§
     {
         RandomItemInstantiate();

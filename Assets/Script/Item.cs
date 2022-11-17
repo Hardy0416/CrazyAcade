@@ -14,4 +14,5 @@ public class Item : MonoBehaviourPunCallbacks
             Destroy(gameObject);
         }
     }
+  
 }

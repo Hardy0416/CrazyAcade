@@ -7,9 +7,12 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    public PhotonView PV;
     public InputField NickNameInput;
     public GameObject DisconnectPaner;
     public GameObject RespqwnPanel;
+
+    int index = 0;
 
 
     private void Awake()
@@ -44,8 +47,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public void Spawn()
     {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate($"Player{index}", Vector3.zero, Quaternion.identity);
         RespqwnPanel.SetActive(false);
-        
+        ++index;
     }
+  
 }
